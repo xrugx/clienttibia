@@ -1,0 +1,387 @@
+{
+    "_comment": "Tibia Client 8.60 - Arquivo de Configuração (Multi-Account)",
+    "server": {
+        "host": "sv.spirit-baiak.com",
+        "loginPort": 7171,
+        "gamePort": 7172
+    },
+    "accounts": [
+        {
+            "name": "minerdrow1",
+            "password": "@Thanosbr17",
+            "characters": [
+                "MaxFull",
+                "Ordinary",
+                "Elder Phelan",
+                "Librarian",
+                "Merchant Maelor",
+                "Hunter Hyaena",
+                "Faelan",
+                "Sir Kazzan",
+                "Aggressive",
+                "Vance the Dwarf"
+            ]
+        },
+        {
+            "name": "minerdrow2",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Oracle Ulysses",
+                "Dorian Pennant",
+                "Drakon Bird",
+                "Digital",
+                "Teredhy",
+                "Bran of Manatee",
+                "ucefxKEghlr",
+                "Mira of Cranny",
+                "Mason Kulag",
+                "Loric of Sloth"
+            ]
+        },
+        {
+            "name": "minerdrow3",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Oric the Sloth",
+                "Uma Lion",
+                "qVGuIwvM",
+                "Finn of Ghoul",
+                "Cipfried",
+                "Hofech Sunrise",
+                "Nezil Dworc",
+                "Flat Gargoyle",
+                "LlRMiewTV",
+                "Historian Bear"
+            ]
+        },
+        {
+            "name": "minerdrow4",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Alchemist Yoke",
+                "Widow",
+                "Afraid Devil",
+                "Nimble Shaman",
+                "Ryder",
+                "Seagull Crab",
+                "Admiral Ubaid",
+                "Grace of Pigeon",
+                "Vera of Itchy",
+                "Veelem"
+            ]
+        },
+        {
+            "name": "minerdrow5",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Isolde",
+                "Viscount",
+                "Birch of Gopher",
+                "Poet Leopard",
+                "Diviner Shanar",
+                "Pemaret of Rat",
+                "Kroox of First",
+                "Thankful Mage",
+                "Aeris the Moon",
+                "Eris the Moral"
+            ]
+        },
+        {
+            "name": "minerdrow6",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Fen Deathslicer",
+                "Scribe Tessa",
+                "Healer Bandit",
+                "Artisan Zara",
+                "Marquis Chicken",
+                "Brewer Cian",
+                "Paladin Snow",
+                "Ancient Grey",
+                "Mist of Elegant",
+                "Sergeant Avar"
+            ]
+        },
+        {
+            "name": "minerdrow7",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Jester Quartz",
+                "Finn of Warlock",
+                "Captain Hilt",
+                "Vendor Stalker",
+                "Tailor Quill",
+                "Half Rabbit",
+                "Count Finn",
+                "Jareth of Spit",
+                "Minstrel Rain",
+                "Jittery Snake"
+            ]
+        },
+        {
+            "name": "minerdrow8",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Journeyman",
+                "Mason Jareth",
+                "Winona of Stone",
+                "Dell of Favored",
+                "Page Uldric",
+                "Navigator Odin",
+                "Crazy Snake",
+                "Marshall Mace",
+                "Oracle Haroun",
+                "Painter Shield"
+            ]
+        },
+        {
+            "name": "minerdrow9",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Guide Crest",
+                "Wes Fire",
+                "Thomas Crystal",
+                "Yawning Coati",
+                "Zachary Spawn",
+                "Defender Nimrod",
+                "Steward Tandros",
+                "Phelan Talented",
+                "Baldric Mummy",
+                "Thief Tessa"
+            ]
+        },
+        {
+            "name": "minerdrow10",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Baron Dell",
+                "Warm Wild",
+                "Jace of Creamy",
+                "Phelan Grimoire",
+                "Wyat the Gaur",
+                "Mistress Baelor",
+                "Champion Grace",
+                "Buccaneer Eris",
+                "Haldir of Xerus",
+                "Diplomat Ulric"
+            ]
+        },
+        {
+            "name": "minerdrow11",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Courser Al Dee",
+                "Marvik Inferno",
+                "Thief Paldric",
+                "Corny Mallard",
+                "Captain Kulag",
+                "Ulric of Tiger",
+                "Dawn the Awful",
+                "Diviner Willow",
+                "Tara Cloister",
+                "Learned Ulric"
+            ]
+        },
+        {
+            "name": "minerdrow12",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Barbara Learned",
+                "Vera Valkyrie",
+                "Tracker Hale",
+                "Grace Harvest",
+                "Ivy of Tame",
+                "Slimy Ocelot",
+                "Cluttered Larva",
+                "Tate of Raccoon",
+                "Dain the Frost",
+                "Jasmine Templar"
+            ]
+        },
+        {
+            "name": "minerdrow13",
+            "password": "@Thanosbr17",
+            "characters": [
+                "Unfolded Grouse",
+                "Pilot Rotworm",
+                "Ursa the Toucan",
+                "Talon Dagger",
+                "Leo Inescapable",
+                "Alia the Goose",
+                "Beatrice Guard",
+                "Bren the Bird",
+                "LeeDelle Cinder",
+                "Selfish Elder"
+            ]
+        }
+    ],
+    "rsa": {
+        "publicKey": null
+    },
+    "dashboard": {
+        "port": 443,
+        "password": "@Thorbr15",
+        "domain": "br.dragonspheres.com.br",
+        "ssl": {
+            "cert": "/etc/letsencrypt/live/br.dragonspheres.com.br/fullchain.pem",
+            "key": "/etc/letsencrypt/live/br.dragonspheres.com.br/privkey.pem",
+            "ca": "/etc/letsencrypt/live/br.dragonspheres.com.br/chain.pem"
+        }
+    },
+    "logging": {
+        "level": "info"
+    },
+    "reconnect": {
+        "enabled": true,
+        "delay": 3000,
+        "maxAttempts": 5
+    },
+    "multiAccount": {
+        "_comment": "Delay (ms) entre o login de cada conta para não sobrecarregar o server",
+        "delayBetweenLogins": 2500
+    },
+    "miner": {
+        "enabled": true,
+        "stoneId": 7807,
+        "pickId": 3456,
+        "mineDelay": 1000,
+        "scanInterval": 500
+    },
+    "autoMessage": {
+        "_comment": "Sistema de mensagens automáticas. type: 1=say, 2=whisper, 3=yell, 7=channel. channelId usado apenas com type channel.",
+        "enabled": true,
+        "messages": [
+            "sell full dodge/critical 6499513169",
+            "sell system client miner com support para mais de 400 contas online 6499513169"
+        ],
+        "interval": 10000,
+        "type": 7,
+        "channelId": 5,
+        "random": false
+    },
+    "globalAutoChat": {
+        "_comment": "Auto-chat global que funciona em TODOS os personagens. type: 1=say, 2=whisper, 3=yell, 7=channel.",
+        "enabled": true,
+        "messages": [
+            "SuperBot à venda! PM me 6499513169",
+            "client para mineração, caça e mais! PM me 6499513169"
+        ],
+        "interval": 10000,
+        "type": 1,
+        "channelId": 0,
+        "random": false
+    },
+    "outfitChanger": {
+        "_comment": "Troca automática de cores do outfit em todos os personagens. interval em ms.",
+        "enabled": false,
+        "interval": 2000
+    },
+    "autoCommand": {
+        "_comment": "Sistema de comandos automáticos. Envia !balance, mostra o total e transfere automaticamente.",
+        "enabled": true,
+        "commands": [
+            "!balance"
+        ],
+        "interval": 120000,
+        "type": 1,
+        "random": false,
+        "loop": true,
+        "responseTimeout": 5000,
+        "transfer": {
+            "enabled": true,
+            "recipient": "Rubey",
+            "delay": 3500
+        }
+    },
+    "cavebot": {
+        "enabled": true,
+        "loop": true,
+        "skipBlocked": true,
+        "maxRetries": 1,
+        "waypointDelay": 500,
+        "walker": {
+            "walkDelay": 10,
+            "maxPending": 2,
+            "ignoreCreatures": true,
+            "ignoreNonPathable": false,
+            "maxPathDistance": 10,
+            "maxPathSteps": 200
+        },
+        "waypoints": [
+                        {
+                "x": 1005,
+                "y": 1011,
+                "z": 8,
+                "label": "Embaixo 1"
+            },
+            
+            {
+                "x": 1004,
+                "y": 1006,
+                "z": 8,
+                "label": "Embaixo 2",
+                "forceWalk": true
+            },
+            
+            {
+                "x": 1004,
+                "y": 1002,
+                "z": 7,
+                "label": "Ponto-1"
+            },
+            {
+                "x": 1007,
+                "y": 1002,
+                "z": 7,
+                "label": "Ponto-2"
+            },
+            {
+                "x": 1007,
+                "y": 998,
+                "z": 7,
+                "label": "Ponto-3",
+                "forceWalk": true,
+                "auxCoord": {
+                    "x": 1234,
+                    "y": 2139,
+                    "z": 6
+                },
+                "auxCoordDelay": 3000
+            },
+            {
+                "x": 1234,
+                "y": 2136,
+                "z": 6,
+                "label": "Ponto-4"
+            },
+            {
+                "_comment": "Exemplo de waypoint de compra - mude as coordenadas e item para seu servidor",
+                "x": 1234,
+                "y": 2135,
+                "z": 6,
+                "label": "Comprar pick",
+                "forceWalk": false,
+                "type": "buy",
+                "npcName": "[NPC] Mining",
+                "itemId": 3456,
+                "itemName": "pick",
+                "buyQuantity": 1,
+                "minQuantity": 1,
+                "ignoreCapacity": false,
+                "buyWithBackpack": false,
+                "sayMessages": [
+                    "hi",
+                    "trade"
+                ],
+                "talkDelay": 2000
+            },
+            {
+                "x": 1234,
+                "y": 2133,
+                "z": 6,
+                "label": "Ponto-6",
+                "forceWalk": true
+            }
+        ]
+    }
+}

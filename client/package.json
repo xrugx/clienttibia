@@ -1,0 +1,23 @@
+{
+  "name": "tibia-client-860",
+  "version": "1.0.0",
+  "description": "Tibia 8.60 Protocol Client - Node.js Implementation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "run": "node run.js"
+  },
+  "keywords": [
+    "tibia",
+    "otserv",
+    "860",
+    "protocol",
+    "game-client"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
