@@ -307,20 +307,23 @@ class CaveBot extends EventEmitter {
         this.logger.info(`[${wpType.toUpperCase()}] ${wp.label} (${wp.x}, ${wp.y}, ${wp.z}) [${this._currentWpIndex + 1}/${this.waypoints.length}]`);
         this.emit('walkingTo', { index: this._currentWpIndex, waypoint: wp, type: wpType });
 
-        // Pre-check: if waypoint is structurally unreachable (different floor or too far), skip immediately
+        // Pre-check: skip waypoints on a different floor (layer) immediately.
+        // Floor checks apply regardless of forceWalk — normal movement cannot cross floors.
         let skipWalk = false;
-        if (!wp.forceWalk) {
-            const player = this.session.getPlayer();
-            if (player?.position) {
-                const pos = player.position;
+        let skipDueToFloor = false;
+        const player = this.session.getPlayer();
+        if (player?.position) {
+            const pos = player.position;
+            const differentFloor = pos.z !== wp.z;
+            if (differentFloor) {
+                this.logger.debug(`Ignorando ${wp.label} — andar diferente (z: ${pos.z} vs ${wp.z})`);
+                skipWalk = true;
+                skipDueToFloor = true;
+            } else if (!wp.forceWalk) {
                 const maxDist = this.walker.pathfinderOptions?.maxDistance || 50;
                 const dist = Math.max(Math.abs(pos.x - wp.x), Math.abs(pos.y - wp.y));
-                const differentFloor = pos.z !== wp.z;
-                if (differentFloor || dist > maxDist) {
-                    const reason = differentFloor
-                        ? `andar diferente (z: ${pos.z} → ${wp.z})`
-                        : `muito longe (dist=${dist}, max=${maxDist})`;
-                    this.logger.warn(`Pulando ${wp.label} — fora de alcance: ${reason}`);
+                if (dist > maxDist) {
+                    this.logger.warn(`Pulando ${wp.label} — fora de alcance: muito longe (dist=${dist}, max=${maxDist})`);
                     skipWalk = true;
                 }
             }
@@ -352,6 +355,9 @@ class CaveBot extends EventEmitter {
 
         if (arrived) {
             this.logger.info(`Chegou em ${wp.label}`);
+        } else if (skipDueToFloor) {
+            this.logger.debug(`Ignorando ${wp.label} — camada diferente`);
+            this.emit('waypointSkipped', { index: this._currentWpIndex, waypoint: wp, reason: 'differentFloor' });
         } else if (this.skipBlocked) {
             this.logger.warn(`Pulando ${wp.label} (não alcançável)`);
             this.emit('waypointSkipped', { index: this._currentWpIndex, waypoint: wp });

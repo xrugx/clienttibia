@@ -330,13 +330,15 @@ class Walker extends EventEmitter {
             return;
         }
 
-        // Quick unreachable check — different floor or too far → fail immediately, no retries
+        // Floor check always applies — normal movement cannot cross floors
+        if (playerPos.z !== this._destination.z) {
+            this.logger.debug(`Destino (${this._destination.x},${this._destination.y},${this._destination.z}) em andar diferente (player z=${playerPos.z}) — fora de alcance`);
+            this._finish(false, 'unreachable');
+            return;
+        }
+
+        // Quick unreachable check — too far → fail immediately, no retries
         if (!this._forceWalk) {
-            if (playerPos.z !== this._destination.z) {
-                this.logger.debug(`Destino (${this._destination.x},${this._destination.y},${this._destination.z}) em andar diferente (player z=${playerPos.z}) — fora de alcance`);
-                this._finish(false, 'unreachable');
-                return;
-            }
             const dist = Math.max(Math.abs(playerPos.x - this._destination.x), Math.abs(playerPos.y - this._destination.y));
             if (dist > this.pathfinderOptions.maxDistance) {
                 this.logger.debug(`Destino (${this._destination.x},${this._destination.y},${this._destination.z}) muito longe (dist=${dist}, max=${this.pathfinderOptions.maxDistance}) — fora de alcance`);
