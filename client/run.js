@@ -281,16 +281,17 @@ function getConfig() {
         const running = manager.getRunning();
         const batch = running.slice(0, MAX_WALK_BATCH);
         let moved = 0;
-        const pausedSessions = [];
+        const pausedSessionIds = [];
 
         for (const session of batch) {
             const sender = session.getSender();
             if (!sender) continue;
 
             // Pause CaveBot/Walker to prevent interference with waypoints
-            if (session.cavebot && session.cavebot._enabled && !session.cavebot._paused) {
+            const cbStatus = session.cavebot ? session.cavebot.getStatus() : null;
+            if (cbStatus && cbStatus.enabled && !cbStatus.paused) {
                 try { session.cavebot.pause(); } catch (_) {}
-                pausedSessions.push(session);
+                pausedSessionIds.push(session.id);
             }
 
             try {
@@ -309,10 +310,13 @@ function getConfig() {
         }
 
         // Resume paused CaveBots after a short delay to let the walk settle
-        if (pausedSessions.length > 0) {
+        if (pausedSessionIds.length > 0) {
             setTimeout(() => {
-                for (const session of pausedSessions) {
-                    if (session.cavebot && session.cavebot._enabled && session.cavebot._paused) {
+                for (const sid of pausedSessionIds) {
+                    const session = manager.getById(sid);
+                    if (!session || !session.cavebot) continue;
+                    const status = session.cavebot.getStatus();
+                    if (status.enabled && status.paused) {
                         try { session.cavebot.resume(); } catch (_) {}
                     }
                 }
