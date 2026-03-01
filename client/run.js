@@ -212,6 +212,9 @@ function getConfig() {
         }
         manager.sessions.clear();
 
+        // Wait for server to fully process disconnections before reconnecting
+        await new Promise(r => setTimeout(r, 3000));
+
         // Reload config from disk
         loadConfig();
 
@@ -270,12 +273,26 @@ function getConfig() {
     }
 
     // ── Walk all online characters in a given direction ──
+    // Limited to MAX_WALK_BATCH (30) accounts per call to avoid flooding.
+    // Pauses CaveBot before sending walk to prevent character/waypoint bugs.
+    const MAX_WALK_BATCH = 30;
+
     function walkAll(direction) {
         const running = manager.getRunning();
+        const batch = running.slice(0, MAX_WALK_BATCH);
         let moved = 0;
-        for (const session of running) {
+        const pausedSessions = [];
+
+        for (const session of batch) {
             const sender = session.getSender();
             if (!sender) continue;
+
+            // Pause CaveBot/Walker to prevent interference with waypoints
+            if (session.cavebot && session.cavebot._enabled && !session.cavebot._paused) {
+                try { session.cavebot.pause(); } catch (_) {}
+                pausedSessions.push(session);
+            }
+
             try {
                 switch (direction) {
                     case 'north':     sender.sendWalkNorth(); break;
@@ -290,7 +307,19 @@ function getConfig() {
                 moved++;
             } catch (_) {}
         }
-        return { moved, total: running.length };
+
+        // Resume paused CaveBots after a short delay to let the walk settle
+        if (pausedSessions.length > 0) {
+            setTimeout(() => {
+                for (const session of pausedSessions) {
+                    if (session.cavebot && session.cavebot._enabled && session.cavebot._paused) {
+                        try { session.cavebot.resume(); } catch (_) {}
+                    }
+                }
+            }, 2000);
+        }
+
+        return { moved, total: running.length, limited: running.length > MAX_WALK_BATCH };
     }
 
     // Expose functions globally for WebDashboard API
