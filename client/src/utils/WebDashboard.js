@@ -606,7 +606,7 @@ class WebDashboard {
                 if (global.__walkAll) {
                     const result = global.__walkAll(direction);
                     res.writeHead(200, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ ok: true, message: `Todos andaram para ${direction}`, moved: result.moved, total: result.total }));
+                    res.end(JSON.stringify({ ok: true, message: `Todos andaram para ${direction}`, moved: result.moved, total: result.total, limited: result.limited }));
                 } else {
                     res.writeHead(500, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ ok: false, error: 'Função walkAll não disponível' }));
