@@ -82,6 +82,9 @@ class Walker extends EventEmitter {
         this._consecutiveStucks = 0;    // how many times we detected stuck in a row
         this._maxConsecutiveStucks = 5; // give up after this many consecutive stucks
 
+        // Pending recalculation timer — tracked so it can be cancelled on stop/new recalc
+        this._recalcTimer = null;
+
         // Auxiliary coordinate system: for portal/teleport waypoints
         // After a timeout, switches the destination check to auxCoord
         this._auxCoord = null;          // {x, y, z} auxiliary coordinate to verify after timeout
@@ -252,6 +255,10 @@ class Walker extends EventEmitter {
             clearTimeout(this._stuckTimer);
             this._stuckTimer = null;
         }
+        if (this._recalcTimer) {
+            clearTimeout(this._recalcTimer);
+            this._recalcTimer = null;
+        }
         // Note: auxCoord timer is NOT cleared here on purpose.
         // It should only be cleared on stop() or when it fires.
     }
@@ -373,7 +380,8 @@ class Walker extends EventEmitter {
         if (!result || result.directions.length === 0) {
             if (attempt < this.recalcRetries) {
                 this.logger.debug(`Path blocked, retry ${attempt + 1}/${this.recalcRetries}`);
-                setTimeout(() => {
+                this._recalcTimer = setTimeout(() => {
+                    this._recalcTimer = null;
                     if (!this._stopped) this._recalcAndWalk(attempt + 1);
                 }, 500);
             } else {
@@ -564,7 +572,10 @@ class Walker extends EventEmitter {
 
         // Recalculate path from current position
         this.emit('walkStuck', { consecutiveStucks: this._consecutiveStucks });
-        setTimeout(() => {
+        // Invalidate stale path to prevent position events from sending wrong steps
+        this._currentPath = null;
+        this._recalcTimer = setTimeout(() => {
+            this._recalcTimer = null;
             if (!this._stopped && this._walking) this._recalcAndWalk(0);
         }, 300);
     }
@@ -754,8 +765,12 @@ class Walker extends EventEmitter {
 
         this.emit('walkCancelled');
 
+        // Invalidate stale path to prevent position events from sending wrong steps
+        this._currentPath = null;
+
         // Recalculate path from current position after delay
-        setTimeout(() => {
+        this._recalcTimer = setTimeout(() => {
+            this._recalcTimer = null;
             if (!this._stopped && this._walking) this._recalcAndWalk(0);
         }, delay);
     }
@@ -789,8 +804,11 @@ class Walker extends EventEmitter {
             this.logger.debug(`Path exhausted at (${pos.x},${pos.y},${pos.z}), ` +
                 `destination (${this._destination.x},${this._destination.y},${this._destination.z}), ` +
                 `recalc #${this._totalRecalcs}, recalculating...`);
+            // Invalidate stale path to prevent position events from sending wrong steps
+            this._currentPath = null;
             // Small delay to let map tiles settle after last step
-            setTimeout(() => {
+            this._recalcTimer = setTimeout(() => {
+                this._recalcTimer = null;
                 if (!this._stopped) this._recalcAndWalk(0);
             }, 100);
         }
